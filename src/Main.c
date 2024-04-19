@@ -14,7 +14,7 @@
 #include "Z_Zip.h"
 
 #ifdef __AMIGAOS4__
-#define AMIGA_VERSION "DoomRPG_0.2.2 (18.04.2024)"
+#define AMIGA_VERSION "DoomRPG 0.2.2 (19.04.2024)"
     static const char *__attribute__((used)) stackcookie = "$STACK: 500000";
     static const char *__attribute__((used)) version_tag = "$VER: " AMIGA_VERSION ;
 #endif
@@ -178,6 +178,12 @@ int main(int argc, char* args[])
 			}
 		}
 
+#ifdef __AMIGAOS4__
+//LOL only TEST !!!!! 
+//I guess SDL_GetTicks is not very precise
+//for better platform independence, another alternative must be used or main lopp delay
+SDL_Delay(10);
+#endif
 		key = DoomRPG_getEventKey(mouse_Button, state);
 		if (key != oldKey) {
 			//printf("oldKey %d\n", oldKey);

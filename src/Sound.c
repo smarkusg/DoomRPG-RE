@@ -107,7 +107,6 @@ Sound_t* Sound_init(Sound_t* sound, DoomRPG_t* doomRpg)
 			if (!rw) {
 				DoomRPG_Error("Error with SDL_RWFromMem: %s\n", SDL_GetError());
 			}
-//fixme: very slow load on AOS4!!!!
 			sound->audioFiles[i].ptr = Mix_LoadWAV_RW(rw, 0);
 			SDL_free(fdata);
 		}

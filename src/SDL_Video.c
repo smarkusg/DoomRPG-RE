@@ -103,6 +103,10 @@ void SDL_InitVideo(void)
     SDL_RenderSetLogicalSize(sdlVideo.renderer, sdlVideo.rendererW, sdlVideo.rendererH);
     SDL_RenderSetIntegerScale(sdlVideo.renderer, sdlVideo.integerScaling);
 
+#ifdef __AMIGAOS4__
+	SDL_SetWindowGrab(sdlVideo.window, SDL_TRUE);
+#endif
+
 	// Check for joysticks
 	SDL_SetHint(SDL_HINT_JOYSTICK_RAWINPUT, "0");
 
@@ -304,9 +308,9 @@ void SDL_InitAudio(void)
 	}
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 #else
+	// change to original sound format
 	if (Mix_OpenAudio(8000, AUDIO_S16SYS, 2, 256) < 0) {
 #endif
-	// change to original sound format there is no MIDI in AOS4
 		DoomRPG_Error("Could not initialize SDL Mixer: %s", Mix_GetError());
 	}
 

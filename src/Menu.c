@@ -1954,6 +1954,9 @@ int Menu_select(Menu_t* menu, int menuId, int itemId)
 
 				SDL_ShowCursor(sdlVideo.fullScreen ? SDL_DISABLE : SDL_ENABLE);
 				SDL_SetWindowFullscreen(sdlVideo.window, sdlVideo.fullScreen ? SDL_WINDOW_FULLSCREEN : 0);
+#ifdef __AMIGAOS4__
+				SDL_SetWindowGrab(sdlVideo.window, SDL_TRUE);
+#endif
 			}
 			else if (itemId == 2) { // New vSync Option
 				sdlVideo.vSync ^= true;

@@ -132,7 +132,11 @@ DoomCanvas_t* DoomCanvas_init(DoomCanvas_t* doomCanvas, DoomRPG_t* doomRpg) // 0
 
 	//New
 	doomCanvas->fontColor = 0xffffffff;
+#ifdef __AMIGAOS4__
+	doomCanvas->mouseSensitivity = 5;
+#else
 	doomCanvas->mouseSensitivity = 50;
+#endif
 	doomCanvas->mouseYMove = true;
 	doomCanvas->sndPriority = false;
 	doomCanvas->vibrateEnabled = true;

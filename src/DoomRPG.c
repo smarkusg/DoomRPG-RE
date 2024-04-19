@@ -965,7 +965,9 @@ void DoomRPG_flushGraphics(DoomRPG_t* doomrpg)
 
 void DoomRPG_clearGraphics(DoomRPG_t* doomrpg)
 {
+#ifndef __AMIGAOS4__
 	SDL_RenderClear(sdlVideo.renderer);
+#endif
 }
 
 void DoomRPG_drawRect(DoomRPG_t* doomrpg, int x, int y, int w, int h)
