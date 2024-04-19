@@ -302,8 +302,11 @@ void SDL_InitAudio(void)
 	else {
 		DoomRPG_Error("Cannot find the soundfont %s file", "gm.sf2");
 	}
-#endif
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+#else
+	if (Mix_OpenAudio(8000, AUDIO_S16SYS, 2, 256) < 0) {
+#endif
+	// change to original sound format there is no MIDI in AOS4
 		DoomRPG_Error("Could not initialize SDL Mixer: %s", Mix_GetError());
 	}
 
