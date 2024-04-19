@@ -85,8 +85,8 @@ Sound_t* Sound_init(Sound_t* sound, DoomRPG_t* doomRpg)
 		int fSize;
 
 		if ((i == 0) || (i == 1) || (i == 3)) { // Midi Files
+#ifndef __AMIGAOS4__
 			snprintf(fileName, sizeof(fileName), "%03d.mid", soundTable[i]);
-
 			fdata = readZipFileEntry(fileName, &zipFile, &fSize);
 			//rw = SDL_RWFromMem(fdata, fSize);
 			//if (!rw) {
@@ -94,11 +94,10 @@ Sound_t* Sound_init(Sound_t* sound, DoomRPG_t* doomRpg)
 			//}
 			//sound->audioFiles[i].ptr = Mix_LoadMUS_RW(rw, 0);
 
-#ifndef __AMIGAOS4__
 			sound->audioFiles[i].ptr = (fluid_player_t*)new_fluid_player(fluidSynth.synth);
 			fluid_player_add_mem((fluid_player_t*)sound->audioFiles[i].ptr, fdata, fSize);
-#endif
 			SDL_free(fdata);
+#endif
 		}
 		else {
 			snprintf(fileName, sizeof(fileName), "%03d.wav", soundTable[i]);
@@ -108,6 +107,7 @@ Sound_t* Sound_init(Sound_t* sound, DoomRPG_t* doomRpg)
 			if (!rw) {
 				DoomRPG_Error("Error with SDL_RWFromMem: %s\n", SDL_GetError());
 			}
+//fixme: very slow load on AOS4!!!!
 			sound->audioFiles[i].ptr = Mix_LoadWAV_RW(rw, 0);
 			SDL_free(fdata);
 		}

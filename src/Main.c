@@ -148,7 +148,9 @@ int main(int argc, char* args[])
 					}
 
 					if (ev.window.event == SDL_WINDOWEVENT_CLOSE) {
+#ifndef __AMIGAOS4__
 						SDL_Log("Window %d closed", ev.window.windowID);
+#endif
 						closeZipFile(&zipFile);
 						DoomRPG_FreeAppData(doomRpg);
 						SDL_CloseAudio2();
